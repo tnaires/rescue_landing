@@ -1,15 +1,14 @@
-var
-  resolution = {
-    width: 640,
-    height: 480
-  },
-  Game = function() {
-    this.setUp = function() {
-      var canvas = document.getElementById('gameCanvas');
-      canvas.width = resolution.width;
-      canvas.height = resolution.height;
-    };
-  },
-  game = new Game();
+var Game = function() {
+  var
+    screen = new Screen(640, 480),
+    player = new Player();
 
-game.setUp();
+  this.setUp = function() {
+    screen.init();
+    screen.add(player);
+  };
+
+  this.start = function() {
+    screen.draw();
+  };
+};
