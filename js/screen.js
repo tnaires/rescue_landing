@@ -1,5 +1,5 @@
 var Screen = function(w, h) {
-  var canvas, objects = [];
+  var canvas, context, objects = [];
 
   this.width = function() {
     return w;
@@ -13,6 +13,8 @@ var Screen = function(w, h) {
     canvas = document.getElementById('gameCanvas');
     canvas.width = this.width();
     canvas.height = this.height();
+
+    context = canvas.getContext('2d');
   };
 
   this.add = function(object) {
@@ -20,8 +22,6 @@ var Screen = function(w, h) {
   };
 
   this.draw = function() {
-    var context = canvas.getContext('2d');
-
     for (var i = 0; i < objects.length; i++) {
       objects[i].draw(context);
     };

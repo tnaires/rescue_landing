@@ -1,5 +1,7 @@
 var Lander = function() {
+  var sprite = new Sprite('res/lander.png');
+
   this.draw = function(context) {
-    context.fillRect(10, 10, 20, 20);
+    sprite.draw(context);
   };
 };

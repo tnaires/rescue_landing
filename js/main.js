@@ -1,4 +1,6 @@
-var game = new Game();
+var
+  FPS = 50,
+  game = new Game();
 
-game.setUp();
+game.setUp(FPS);
 game.start();
