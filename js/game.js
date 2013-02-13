@@ -1,11 +1,11 @@
 var Game = function() {
   var
     screen = new Screen(640, 480),
-    player = new Player();
+    lander = new Lander();
 
   this.setUp = function() {
     screen.init();
-    screen.add(player);
+    screen.add(lander);
   };
 
   this.start = function() {
