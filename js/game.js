@@ -1,21 +1,20 @@
 var Game = function() {
   var
     fps,
-    screen = new Screen(640, 480),
-    lander = new Lander();
+    screen,
+    lander;
 
-  this.setUp = function(_fps) {
+  this.setUp = function(_fps, resolution) {
     fps = _fps;
-
+    
+    screen = new Screen(resolution.width, resolution.height);
     screen.init();
+
+    lander = new Lander();
     screen.add(lander);
   };
 
   this.start = function() {
-    if (!fps) {
-      throw 'Frames per second (FPS) not defined.';
-    }
-
     screen.draw();
     setTimeout(this.start, 1000 / fps);
   };

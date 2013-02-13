@@ -1,6 +1,11 @@
 var
   FPS = 50,
-  game = new Game();
+  resolution = {
+    'width': 640,
+    'height': 480
+  },
+  game;
 
-game.setUp(FPS);
+game = new Game();
+game.setUp(FPS, resolution);
 game.start();
