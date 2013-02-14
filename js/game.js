@@ -1,8 +1,5 @@
 var Game = function() {
-  var
-    fps,
-    screen,
-    lander;
+  var fps, screen, inputHandler, lander;
 
   this.setUp = function(_fps, resolution) {
     fps = _fps;
@@ -10,8 +7,12 @@ var Game = function() {
     screen = new Screen(resolution.width, resolution.height);
     screen.init();
 
+    inputHandler = new InputHandler();
+
     lander = new Lander();
     screen.add(lander);
+
+    inputHandler.buildListeners();
   };
 
   this.start = function() {
