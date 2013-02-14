@@ -6,7 +6,7 @@ var InputHandler = function() {
       callbacks[inputEvent] = {};
     }
 
-    eventCallbacks = callbacks[inputEvent];
+    var eventCallbacks = callbacks[inputEvent];
 
     if (!eventCallbacks[key]) {
       eventCallbacks[key] = [];
@@ -18,13 +18,11 @@ var InputHandler = function() {
   this.buildListeners = function() {
     for (inputEvent in callbacks) {
       window.addEventListener(inputEvent, function(e) {
-        for (key in callbacks[inputEvent]) {
-          if (e.keyCode == key) {
-            eventCallbacks = callbacks[inputEvent][key];
+        var eventCallbacks = callbacks[e.type][e.keyCode];
 
-            for (var i = 0; i < eventCallbacks.length; i++) {
-              eventCallbacks[i]();
-            }
+        if (eventCallbacks) {
+          for (var i = 0; i < eventCallbacks.length; i++) {
+            eventCallbacks[i]();
           }
         }
       });
@@ -33,7 +31,6 @@ var InputHandler = function() {
 };
 
 InputHandler.ON_KEY_DOWN = 'keydown';
-InputHandler.ON_KEY_PRESS = 'keypress';
 InputHandler.ON_KEY_UP = 'keyup';
 
 InputHandler.ARROW_UP = 38;
