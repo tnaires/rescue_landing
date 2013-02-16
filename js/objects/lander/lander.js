@@ -13,6 +13,11 @@ var Lander = function() {
 
     updatePosition = function() {
       speed.accelerate(gravity);
+
+      if (boosting) {
+        speed.accelerate(boost);
+      };
+
       position.shift(speed);
       position.shift(shiftDirection.speed());
     };
@@ -24,7 +29,6 @@ var Lander = function() {
 
   this.boost = function() {
     boosting = true;
-    speed.accelerate(boost);
   };
 
   this.release = function() {
