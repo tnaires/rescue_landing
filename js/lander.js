@@ -1,7 +1,9 @@
 var Lander = function() {
-  var sprite = new Sprite('res/lander.png');
+  var
+    frame = new Rectangle(40, 40),
+    spriteSheet = new SpriteSheet('res/lander.png', frame);
 
   this.draw = function(context) {
-    sprite.draw(context);
+    spriteSheet.draw(0, context);
   };
 };
