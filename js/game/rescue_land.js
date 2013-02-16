@@ -12,6 +12,9 @@ var RescueLand = function() {
     lander = new Lander();
     screen.add(lander);
 
+    inputHandler.registerCallback(InputHandler.ON_KEY_DOWN, InputHandler.ARROW_UP, lander.boost);
+    inputHandler.registerCallback(InputHandler.ON_KEY_UP, InputHandler.ARROW_UP, lander.release);
+
     inputHandler.buildListeners();
   };
 
