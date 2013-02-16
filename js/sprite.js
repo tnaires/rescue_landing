@@ -1,17 +1,25 @@
 var Sprite = function(imagePath) {
   var
-    image = new Image(),
+    img = new Image(),
     loaded = false;
 
-  image.onload = function() {
+  img.onload = function() {
     loaded = true;
   };
 
-  image.src = imagePath;
+  img.src = imagePath;
+
+  this.image = function() {
+    return img;
+  };
+
+  this.ready = function() {
+    return loaded;
+  };
 
   this.draw = function(context) {
     if (loaded) {
-      context.drawImage(image, 0, 0);
+      context.drawImage(img, 0, 0);
     }
   };
 };
