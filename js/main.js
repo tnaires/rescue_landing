@@ -6,6 +6,6 @@ var
   },
   game;
 
-game = new Game();
+game = new RescueLand();
 game.setUp(FPS, resolution);
 game.start();

@@ -1,4 +1,4 @@
-var Game = function() {
+var RescueLand = function() {
   var fps, screen, inputHandler, lander;
 
   this.setUp = function(_fps, resolution) {
