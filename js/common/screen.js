@@ -21,6 +21,10 @@ var Screen = function(w, h) {
     objects.push(object);
   };
 
+  this.clear = function() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  };
+
   this.draw = function() {
     for (var i = 0; i < objects.length; i++) {
       objects[i].draw(context);

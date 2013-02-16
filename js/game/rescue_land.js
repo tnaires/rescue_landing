@@ -16,7 +16,8 @@ var RescueLand = function() {
   };
 
   this.start = function() {
+    screen.clear();
     screen.draw();
-    setTimeout(this.start, 1000 / fps);
+    setInterval(this.start, 1000 / fps);
   };
 };
