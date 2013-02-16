@@ -7,11 +7,14 @@ var Lander = function() {
     gravity = new Acceleration(0, 0.05),
     boost = new Acceleration(0, -0.2);
     speed = new Speed(0, 0),
+
     boosting = false,
+    shiftDirection = Shift.NONE,
 
     updatePosition = function() {
       speed.accelerate(gravity);
       position.shift(speed);
+      position.shift(shiftDirection.speed());
     };
 
   this.draw = function(context) {
@@ -26,5 +29,17 @@ var Lander = function() {
 
   this.release = function() {
     boosting = false;
+  };
+
+  this.shiftLeft = function() {
+    shiftDirection = Shift.LEFT;
+  };
+
+  this.shiftRight = function() {
+    shiftDirection = Shift.RIGHT;
+  };
+
+  this.noShift = function() {
+    shiftDirection = Shift.NONE;
   };
 };
