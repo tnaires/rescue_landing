@@ -13,11 +13,16 @@ var RescueLand = function() {
       inputHandler.registerCallback(InputHandler.ON_KEY_UP, InputHandler.ARROW_RIGHT, lander.noShift);
 
       inputHandler.buildListeners();
+    },
+
+    tick = function() {
+      screen.clear();
+      screen.draw();
     };
 
   this.setUp = function(_fps, resolution) {
     fps = _fps;
-    
+
     screen = new Screen(resolution.width, resolution.height);
     screen.init();
 
@@ -30,8 +35,6 @@ var RescueLand = function() {
   };
 
   this.start = function() {
-    screen.clear();
-    screen.draw();
-    setInterval(this.start, 1000 / fps);
+    setInterval(tick, 1000 / fps);
   };
 };
