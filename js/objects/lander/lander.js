@@ -1,6 +1,6 @@
 var Lander = function() {
   var
-    COORDINATES = { X: 30, Y: 0},
+    COORDINATES = {X: 30, Y: 0},
 
     frame = new Rectangle(40, 40),
     spriteSheet = new SpriteSheet('res/lander.png', frame),
@@ -11,22 +11,26 @@ var Lander = function() {
     speed = new Speed(0, 0),
 
     boosting = false,
-    shiftDirection = Shift.NONE,
+    shiftDirection = Shift.NONE;
 
-    updatePosition = function() {
-      speed.accelerate(gravity);
+  this.clear = function(context) {
+    // Clear a rectangle 1 pixel larger than the sprite
+    context.clearRect(position.x() - 1, position.y() - 1, frame.width() + 2, frame.height() + 2);
+  };
 
-      if (boosting) {
-        speed.accelerate(boost);
-      };
+  this.update = function() {
+    speed.accelerate(gravity);
 
-      position.shift(speed);
-      position.shift(shiftDirection.speed());
+    if (boosting) {
+      speed.accelerate(boost);
     };
+
+    position.shift(speed);
+    position.shift(shiftDirection.speed());
+  };
 
   this.draw = function(context) {
     spriteSheet.draw(boosting ? 1 : 0, position, context);
-    updatePosition();
   };
 
   this.boost = function() {

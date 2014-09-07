@@ -17,6 +17,7 @@ var RescueLand = function() {
 
     tick = function() {
       screen.clear();
+      screen.update();
       screen.draw();
     },
 

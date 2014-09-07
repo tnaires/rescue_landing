@@ -1,5 +1,12 @@
 var Screen = function(_width, _height) {
-  var canvas, context, objects = [];
+  var
+    canvas, context, objects = [],
+
+    eachObject = function(callback) {
+      for (var i = 0; i < objects.length; i++) {
+        callback(objects[i]);
+      }
+    };
 
   this.width = function() {
     return _width;
@@ -22,12 +29,14 @@ var Screen = function(_width, _height) {
   };
 
   this.clear = function() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
+    eachObject(function(object) { object.clear(context); });
+  };
+
+  this.update = function() {
+    eachObject(function(object) { object.update(); });
   };
 
   this.draw = function() {
-    for (var i = 0; i < objects.length; i++) {
-      objects[i].draw(context);
-    };
+    eachObject(function(object) { object.draw(context); });
   };
 };
