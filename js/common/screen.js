@@ -1,16 +1,16 @@
-var Screen = function(w, h) {
+var Screen = function(_width, _height) {
   var canvas, context, objects = [];
 
   this.width = function() {
-    return w;
+    return _width;
   };
 
   this.height = function() {
-    return h;
+    return _height;
   };
 
-  this.init = function() {
-    canvas = document.getElementById('gameCanvas');
+  this.init = function(canvasId) {
+    canvas = document.getElementById(canvasId);
     canvas.width = this.width();
     canvas.height = this.height();
 
