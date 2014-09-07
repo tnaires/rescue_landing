@@ -1,9 +1,11 @@
 var Lander = function() {
   var
+    COORDINATES = { X: 30, Y: 0},
+
     frame = new Rectangle(40, 40),
     spriteSheet = new SpriteSheet('res/lander.png', frame),
 
-    position = new Position(0, 0),
+    position = new Position(COORDINATES.X, COORDINATES.Y),
     gravity = new Acceleration(0, 0.05),
     boost = new Acceleration(0, -0.2);
     speed = new Speed(0, 0),
