@@ -1,6 +1,6 @@
 var RescueLand = function() {
   var
-    fps, screen, inputHandler, lander,
+    fps, screen, inputHandler, lander, level,
 
     registerInputCallbacks = function() {
       inputHandler.registerCallback(InputHandler.ON_KEY_DOWN, InputHandler.ARROW_UP, lander.boost);
@@ -30,6 +30,9 @@ var RescueLand = function() {
 
     lander = new Lander();
     screen.add(lander);
+
+    level = new Level();
+    screen.add(level);
 
     registerInputCallbacks();
   };
