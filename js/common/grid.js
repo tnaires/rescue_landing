@@ -27,4 +27,21 @@ var Grid = function(_rows, _columns) {
 
     context.stroke();
   };
+
+  this.renderFrom = function(context, gridMatrix) {
+    var
+      canvas = context.canvas,
+      rowHeight = canvas.height / _rows,
+      columnWidth = canvas.width / _columns;
+
+    for (var i = 0; i < gridMatrix.length; i++) {
+      var row = gridMatrix[i];
+
+      for (var j = 0; j < row.length; j++) {
+        if (row.charAt(j) === '#') {
+          context.fillRect(j * columnWidth, i * rowHeight, columnWidth, rowHeight);
+        }
+      }
+    }
+  };
 };
