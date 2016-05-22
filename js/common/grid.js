@@ -1,17 +1,17 @@
-var Grid = function(_rows, _columns) {
+var Grid = function(_matrix) {
   this.rows = function() {
-    return _rows;
+    return _matrix.length;
   };
 
   this.columns = function() {
-    return _columns;
+    return _matrix[0].length;
   };
 
   this.drawLines = function(context) {
     var
       canvas = context.canvas,
-      rowIncrement = canvas.height / _rows,
-      columnIncrement = canvas.width / _columns;
+      rowIncrement = canvas.height / this.rows(),
+      columnIncrement = canvas.width / this.columns();
 
     context.beginPath();
 
@@ -28,14 +28,14 @@ var Grid = function(_rows, _columns) {
     context.stroke();
   };
 
-  this.renderFrom = function(context, gridMatrix) {
+  this.render = function(context) {
     var
       canvas = context.canvas,
-      rowHeight = canvas.height / _rows,
-      columnWidth = canvas.width / _columns;
+      rowHeight = canvas.height / this.rows(),
+      columnWidth = canvas.width / this.columns();
 
-    for (var i = 0; i < gridMatrix.length; i++) {
-      var row = gridMatrix[i];
+    for (var i = 0; i < _matrix.length; i++) {
+      var row = _matrix[i];
 
       for (var j = 0; j < row.length; j++) {
         if (row.charAt(j) === '#') {

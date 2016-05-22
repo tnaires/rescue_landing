@@ -1,15 +1,13 @@
-var Level = function() {
+var Level = function(_levelMatrix) {
   var
-    GRID = { ROWS: 16, COLUMNS: 20 },
-
-    grid = new Grid(GRID.ROWS, GRID.COLUMNS);
+    grid = new Grid(_levelMatrix);
 
   this.draw = function(context) {
-    grid.renderFrom(context, Level.ONE);
+    grid.render(context);
   };
 };
 
-Level.ONE = [
+Level.ONE = new Level([
   '                    ',
   '                    ',
   '                    ',
@@ -26,4 +24,4 @@ Level.ONE = [
   '                    ',
   '                    ',
   '####################'
-];
+]);

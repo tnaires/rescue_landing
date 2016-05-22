@@ -33,8 +33,7 @@ var RescueLand = function() {
       background = new Screen(resolution.width, resolution.height);
       background.init('background');
 
-      level = new Level();
-      background.add(level);
+      background.add(Level.ONE);
 
       background.draw();
     };
