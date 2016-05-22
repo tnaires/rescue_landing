@@ -2,7 +2,7 @@ var Screen = function(_width, _height) {
   var
     canvas, context, objects = [],
 
-    eachObject = function(callback) {
+    _eachObject = function(callback) {
       for (var i = 0; i < objects.length; i++) {
         callback(objects[i]);
       }
@@ -29,14 +29,14 @@ var Screen = function(_width, _height) {
   };
 
   this.clear = function() {
-    eachObject(function(object) { object.clear(context); });
+    _eachObject(function(object) { object.clear(context); });
   };
 
   this.update = function() {
-    eachObject(function(object) { object.update(); });
+    _eachObject(function(object) { object.update(); });
   };
 
   this.draw = function() {
-    eachObject(function(object) { object.draw(context); });
+    _eachObject(function(object) { object.draw(context); });
   };
 };
