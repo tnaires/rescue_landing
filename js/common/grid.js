@@ -1,4 +1,8 @@
 var Grid = function(_matrix) {
+  var
+    FILL_COLOR = '#000000',
+    EMPTY_CELL = ' ';
+
   this.rows = function() {
     return _matrix.length;
   };
@@ -34,11 +38,13 @@ var Grid = function(_matrix) {
       rowHeight = canvas.height / this.rows(),
       columnWidth = canvas.width / this.columns();
 
+    context.fillStyle = FILL_COLOR;
+
     for (var i = 0; i < _matrix.length; i++) {
       var row = _matrix[i];
 
       for (var j = 0; j < row.length; j++) {
-        if (row.charAt(j) === '#') {
+        if (row.charAt(j) !== EMPTY_CELL) {
           context.fillRect(j * columnWidth, i * rowHeight, columnWidth, rowHeight);
         }
       }
