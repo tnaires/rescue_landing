@@ -11,4 +11,9 @@ var Speed = function(hor, ver) {
     hor += acceleration.horizontal();
     ver += acceleration.vertical();
   };
+
+  this.reset = function() {
+    hor = 0;
+    ver = 0;
+  }
 };

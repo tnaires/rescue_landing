@@ -1,8 +1,11 @@
 var Lander = function() {
   var
-    COORDINATES = {X: 30, Y: 0},
+    COORDINATES = {X: 50, Y: 50},
+    LANDER_SIZE = 40,
 
-    frame = new Rectangle(40, 40),
+    currentLevel,
+
+    frame = new Rectangle(LANDER_SIZE, LANDER_SIZE),
     spriteSheet = new SpriteSheet('res/lander.png', frame),
 
     position = new Position(COORDINATES.X, COORDINATES.Y),
@@ -11,7 +14,19 @@ var Lander = function() {
     speed = new Speed(0, 0),
 
     boosting = false,
-    shiftDirection = Shift.NONE;
+    destroyed = false,
+    shiftDirection = Shift.NONE,
+
+    _collidedWithWalls = function() {
+      return currentLevel.wallsCollideWith(position) ||
+        currentLevel.wallsCollideWith(position.plus(LANDER_SIZE, 0)) ||
+        currentLevel.wallsCollideWith(position.plus(0, LANDER_SIZE)) ||
+        currentLevel.wallsCollideWith(position.plus(LANDER_SIZE, LANDER_SIZE));
+    };
+
+  this.setCurrentLevel = function(_currentLevel) {
+    currentLevel = _currentLevel;
+  };
 
   this.clear = function(context) {
     // Clear a rectangle 1 pixel larger than the sprite
@@ -19,18 +34,25 @@ var Lander = function() {
   };
 
   this.update = function() {
-    speed.accelerate(gravity);
+    if (!destroyed) {
+      speed.accelerate(gravity);
 
-    if (boosting) {
-      speed.accelerate(boost);
-    };
+      if (boosting) {
+        speed.accelerate(boost);
+      };
 
-    position.shift(speed);
-    position.shift(shiftDirection.speed());
+      position.shift(speed);
+      position.shift(shiftDirection.speed());
+
+      if (_collidedWithWalls()) {
+        speed.reset();
+        destroyed = true;
+      }
+    }
   };
 
   this.draw = function(context) {
-    spriteSheet.draw(boosting ? 1 : 0, position, context);
+    spriteSheet.draw(destroyed ? 2 : (boosting ? 1 : 0), position, context);
   };
 
   this.boost = function() {

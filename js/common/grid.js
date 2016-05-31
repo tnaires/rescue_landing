@@ -51,3 +51,5 @@ var Grid = function(_matrix) {
     }
   };
 };
+
+Grid.EMPTY_CELL = ' ';
