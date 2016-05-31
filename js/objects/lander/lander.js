@@ -1,14 +1,15 @@
 var Lander = function() {
   var
-    COORDINATES = {X: 50, Y: 50},
+    INITIAL_COORDINATES = {X: 50, Y: 50},
     LANDER_SIZE = 40,
+    SPRITE_INDEX = { DEFAULT: 0, BOOSTING: 1, DESTROYED: 2 },
 
     currentLevel,
 
     frame = new Rectangle(LANDER_SIZE, LANDER_SIZE),
     spriteSheet = new SpriteSheet('res/lander.png', frame),
 
-    position = new Position(COORDINATES.X, COORDINATES.Y),
+    position = new Position(INITIAL_COORDINATES.X, INITIAL_COORDINATES.Y),
     gravity = new Acceleration(0, 0.05),
     boost = new Acceleration(0, -0.2);
     speed = new Speed(0, 0),
@@ -52,7 +53,15 @@ var Lander = function() {
   };
 
   this.draw = function(context) {
-    spriteSheet.draw(destroyed ? 2 : (boosting ? 1 : 0), position, context);
+    var spriteIndex = SPRITE_INDEX.DEFAULT;
+
+    if (destroyed) {
+      spriteIndex = SPRITE_INDEX.DESTROYED;
+    } else if (boosting) {
+      spriteIndex = SPRITE_INDEX.BOOSTING;
+    }
+
+    spriteSheet.draw(spriteIndex, position, context);
   };
 
   this.boost = function() {
