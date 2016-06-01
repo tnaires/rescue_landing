@@ -16,13 +16,17 @@ var Lander = function() {
 
     boosting = false,
     destroyed = false,
+    landed = false,
     shiftDirection = Shift.NONE,
 
-    _collidedWithWalls = function() {
-      return currentLevel.wallsCollideWith(position) ||
-        currentLevel.wallsCollideWith(position.plus(LANDER_SIZE, 0)) ||
-        currentLevel.wallsCollideWith(position.plus(0, LANDER_SIZE)) ||
+    _bottomCollision = function() {
+      return currentLevel.wallsCollideWith(position.plus(0, LANDER_SIZE)) ||
         currentLevel.wallsCollideWith(position.plus(LANDER_SIZE, LANDER_SIZE));
+    },
+
+    _topCollision = function() {
+      return currentLevel.wallsCollideWith(position) ||
+        currentLevel.wallsCollideWith(position.plus(LANDER_SIZE, 0));
     };
 
   this.setCurrentLevel = function(_currentLevel) {
@@ -36,18 +40,29 @@ var Lander = function() {
 
   this.update = function() {
     if (!destroyed) {
-      speed.accelerate(gravity);
+      if (!landed) {
+        position.shift(shiftDirection.speed());
+        speed.accelerate(gravity);
+      }
 
       if (boosting) {
+        landed = false;
         speed.accelerate(boost);
       };
 
       position.shift(speed);
-      position.shift(shiftDirection.speed());
 
-      if (_collidedWithWalls()) {
+      if (_bottomCollision()) {
+        if (_topCollision() || speed.vertical() > 2) {
+          destroyed = true;
+        } else {
+          landed = true;
+        }
+
         speed.reset();
+      } else if (_topCollision()) {
         destroyed = true;
+        speed.reset();
       }
     }
   };
