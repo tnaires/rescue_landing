@@ -4,7 +4,7 @@ Rescue land
 Overview
 --------
 
-This is an in-development lander-style game for the First ThoughtWorks Recife Game Contest. The goal is to go through the stages controlling your lander to go into caves and rescue hostages.
+This is an in-development lander-style game. The goal is to go through the stages controlling your lander to go into caves and rescue hostages.
 
 Where to play
 -------------
