@@ -4,20 +4,27 @@ var Lander = function() {
     LANDER_SIZE = 40,
     SPRITE_INDEX = { DEFAULT: 0, BOOSTING: 1, DESTROYED: 2 },
 
-    currentLevel,
-
     frame = new Rectangle(LANDER_SIZE, LANDER_SIZE),
     spriteSheet = new SpriteSheet('res/lander.png', frame),
 
-    position = new Position(INITIAL_COORDINATES.X, INITIAL_COORDINATES.Y),
     gravity = new Acceleration(0, 0.05),
-    boost = new Acceleration(0, -0.2);
-    speed = new Speed(0, 0),
+    boost = new Acceleration(0, -0.2),
 
-    boosting = false,
-    destroyed = false,
-    landed = false,
-    shiftDirection = Shift.NONE,
+    currentLevel,
+
+    position,
+    lastPosition,
+    speed,
+    shiftDirection,
+
+    boosting,
+    destroyed,
+    landed,
+
+    _clearPosition = function(context, pos) {
+      // Clear a rectangle 1 pixel larger than the sprite
+      context.clearRect(pos.x() - 1, pos.y() - 1, frame.width() + 2, frame.height() + 2);
+    },
 
     _bottomCollision = function() {
       return currentLevel.wallsCollideWith(position.plus(0, LANDER_SIZE)) ||
@@ -29,13 +36,26 @@ var Lander = function() {
         currentLevel.wallsCollideWith(position.plus(LANDER_SIZE, 0));
     };
 
+  this.reset = function() {
+    boosting = false;
+    destroyed = false;
+    landed = false;
+    shiftDirection = Shift.NONE;
+    position = new Position(INITIAL_COORDINATES.X, INITIAL_COORDINATES.Y);
+    speed = new Speed(0, 0);
+  };
+
   this.setCurrentLevel = function(_currentLevel) {
     currentLevel = _currentLevel;
+    this.reset();
   };
 
   this.clear = function(context) {
-    // Clear a rectangle 1 pixel larger than the sprite
-    context.clearRect(position.x() - 1, position.y() - 1, frame.width() + 2, frame.height() + 2);
+    if (lastPosition) {
+      _clearPosition(context, lastPosition);
+    }
+
+    _clearPosition(context, position);
   };
 
   this.update = function() {
@@ -50,6 +70,7 @@ var Lander = function() {
         speed.accelerate(boost);
       };
 
+      lastPosition = position;
       position.shift(speed);
 
       if (_bottomCollision()) {

@@ -14,9 +14,9 @@ Access http://tnaires.github.com/rescue_land/ to play the alpha (I said **ALPHA!
 How to play
 -----------
 
-Arrow up - boost lander    
-Arrow left - shift lander to the left    
-Arrow right - shift lander to the right    
+Arrow up - boost lander
+Arrow left - shift lander to the left
+Arrow right - shift lander to the right
 
 
 **Note**: this document is a work in progress.

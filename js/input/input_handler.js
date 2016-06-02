@@ -33,7 +33,8 @@ var InputHandler = function() {
 InputHandler.ON_KEY_DOWN = 'keydown';
 InputHandler.ON_KEY_UP = 'keyup';
 
-InputHandler.ARROW_UP = 38;
-InputHandler.ARROW_DOWN = 40;
+InputHandler.SPACE = 32;
 InputHandler.ARROW_LEFT = 37;
+InputHandler.ARROW_UP = 38;
 InputHandler.ARROW_RIGHT = 39;
+InputHandler.ARROW_DOWN = 40;
