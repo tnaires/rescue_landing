@@ -22,3 +22,17 @@ canvas {
 #lander {
   z-index: 0;
 }
+
+#instructions {
+  position: absolute;
+  top: 500px;
+
+  width: 640px;
+
+  text-align: center;
+  font-family: "Lucida Console", Monaco, monospace;
+}
+
+p {
+  line-height: 5px;
+}

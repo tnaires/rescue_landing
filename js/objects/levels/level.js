@@ -25,7 +25,7 @@ var Level = function(_levelMatrix) {
 };
 
 Level.ONE = new Level([
-  '#   ################',
+  '####################',
   '#                  #',
   '#                  #',
   '#                  #',
