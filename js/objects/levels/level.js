@@ -1,12 +1,25 @@
 var Level = function(_levelMatrix) {
   var
+    RENDER_MAP = {
+      ' ': function(context, cell) {
+
+      },
+      'W': function(context, cell) {
+        context.fillRect(
+          cell.columnIndex() * cell.width(),
+          cell.rowIndex() * cell.height(),
+          cell.width(),
+          cell.height());
+      }
+    },
+
     height, width,
     grid = new Grid(_levelMatrix);
 
   this.draw = function(context) {
     height = context.canvas.height;
     width = context.canvas.width;
-    grid.render(context);
+    grid.render(context, RENDER_MAP);
   };
 
   this.wallsCollideWith = function(position) {
@@ -15,9 +28,7 @@ var Level = function(_levelMatrix) {
         cellX = Math.floor(position.x() / (width / grid.columns())),
         cellY = Math.floor(position.y() / (height / grid.rows()));
 
-      //console.log(cellX + ' ' + cellY + ' @@ ' + _levelMatrix[cellY][cellX] + ' @@');
-
-      return _levelMatrix[cellY][cellX] !== Grid.EMPTY_CELL;
+      return _levelMatrix[cellY][cellX] !== ' ';
     }
 
     return false;
@@ -25,20 +36,20 @@ var Level = function(_levelMatrix) {
 };
 
 Level.ONE = new Level([
-  '####################',
-  '#                  #',
-  '#                  #',
-  '#                  #',
-  '#                  #',
-  '#                  #',
-  '#                  #',
-  '#                  #',
-  '#                  #',
-  '#                  #',
-  '#                  #',
-  '#                  #',
-  '#                  #',
-  '#                  #',
-  '#                  #',
-  '####################'
+  'WWWWWWWWWWWWWWWWWWWW',
+  'W                  W',
+  'W                  W',
+  'W                  W',
+  'W                  W',
+  'W                  W',
+  'W                  W',
+  'W                  W',
+  'W                  W',
+  'W                  W',
+  'W                  W',
+  'W                  W',
+  'W                  W',
+  'W                  W',
+  'W                  W',
+  'WWWWWWWWWWWWWWWWWWWW'
 ]);

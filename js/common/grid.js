@@ -1,7 +1,6 @@
 var Grid = function(_matrix) {
   var
-    FILL_COLOR = '#000000',
-    EMPTY_CELL = ' ';
+    FILL_COLOR = '#000000';
 
   this.rows = function() {
     return _matrix.length;
@@ -32,7 +31,7 @@ var Grid = function(_matrix) {
     context.stroke();
   };
 
-  this.render = function(context) {
+  this.render = function(context, renderMap) {
     var
       canvas = context.canvas,
       rowHeight = canvas.height / this.rows(),
@@ -44,12 +43,14 @@ var Grid = function(_matrix) {
       var row = _matrix[i];
 
       for (var j = 0; j < row.length; j++) {
-        if (row.charAt(j) !== EMPTY_CELL) {
-          context.fillRect(j * columnWidth, i * rowHeight, columnWidth, rowHeight);
+        var
+          cell = new Cell(i, j, columnWidth, rowHeight),
+          renderFunction = renderMap[row.charAt(j)];
+
+        if (renderFunction) {
+          renderFunction(context, cell);
         }
       }
     }
   };
 };
-
-Grid.EMPTY_CELL = ' ';
