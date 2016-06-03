@@ -12,7 +12,11 @@ var Level = function(_levelMatrix) {
           cell.height());
       },
       'H': function(context, cell) {
-        var hostage = new Hostage(200, 200);
+        var
+          x = cell.columnIndex() * cell.width() + ((cell.width() - Hostage.SIZE) / 2),
+          y = cell.rowIndex() * cell.height() + (cell.height() - Hostage.SIZE - 1),
+          hostage = new Hostage(new Position(x, y));
+
         hostage.render(context);
       }
     },
@@ -32,7 +36,7 @@ var Level = function(_levelMatrix) {
         cellX = Math.floor(position.x() / (width / grid.columns())),
         cellY = Math.floor(position.y() / (height / grid.rows()));
 
-      return _levelMatrix[cellY][cellX] !== ' ';
+      return _levelMatrix[cellY][cellX] === 'W';
     }
 
     return false;
@@ -49,11 +53,11 @@ Level.ONE = new Level([
   'W                  W',
   'W                  W',
   'W                  W',
+  'W                  W',
+  'W                  W',
+  'W                  W',
+  'W                  W',
+  'W                  W',
   'W         H        W',
-  'W                  W',
-  'W                  W',
-  'W                  W',
-  'W                  W',
-  'W                  W',
   'WWWWWWWWWWWWWWWWWWWW'
 ]);

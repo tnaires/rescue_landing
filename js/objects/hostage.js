@@ -1,13 +1,10 @@
-var Hostage = function(_x, _y) {
+var Hostage = function(position) {
   var
-    HOSTAGE_SIZE = 15,
     IMAGE_INDEX_ORDER = [0, 1, 2, 1],
     IMAGE_INDEX_CHANGE_TIME = 200,
 
-    frame = new Rectangle(HOSTAGE_SIZE, HOSTAGE_SIZE),
+    frame = new Rectangle(Hostage.SIZE, Hostage.SIZE),
     spriteSheet = new SpriteSheet('res/hostage.png', frame),
-
-    position = new Position(_x, _y),
 
     currentImageIndex = IMAGE_INDEX_ORDER[0],
 
@@ -21,3 +18,5 @@ var Hostage = function(_x, _y) {
     setInterval(_cycle, IMAGE_INDEX_CHANGE_TIME, context);
   };
 };
+
+Hostage.SIZE = 15;
