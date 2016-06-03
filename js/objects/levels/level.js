@@ -51,7 +51,11 @@ var Level = function(_levelMatrix) {
 
   this.exitReached = function(position) {
     return _checkCollision(position) === 'E';
-  }
+  };
+
+  this.hostageCount = function() {
+    return grid.count('H');
+  };
 };
 
 Level.ONE = new Level([

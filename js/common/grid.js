@@ -53,4 +53,18 @@ var Grid = function(_matrix) {
       }
     }
   };
+
+  this.count = function(character) {
+    var result = 0;
+
+    for (var i = 0; i < _matrix.length; i++) {
+      for (var j = 0; j < _matrix[i].length; j++) {
+        if (_matrix[i][j] === character) {
+          result++;
+        }
+      }
+    }
+
+    return result;
+  };
 };

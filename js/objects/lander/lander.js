@@ -24,7 +24,6 @@ var Lander = function() {
     failedRescue,
 
     _clearPosition = function(context, pos) {
-      // Clear a rectangle 1 pixel larger than the sprite
       context.clearRect(pos.x() - 1, pos.y() - 1, frame.width() + 2, frame.height() + 2);
     },
 
@@ -39,7 +38,6 @@ var Lander = function() {
     };
 
   this.reset = function() {
-    hostageCount = 0;
     boosting = false;
     destroyed = false;
     landed = false;
@@ -51,6 +49,7 @@ var Lander = function() {
 
   this.setCurrentLevel = function(_currentLevel) {
     currentLevel = _currentLevel;
+    hostageCount = currentLevel.hostageCount();
     this.reset();
   };
 
@@ -89,7 +88,7 @@ var Lander = function() {
         destroyed = true;
         speed.reset();
       } else if (currentLevel.exitReached(position)) {
-        failedRescue = (hostageCount == 0);
+        failedRescue = (hostageCount != 0);
       }
     }
   };
