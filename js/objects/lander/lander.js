@@ -2,7 +2,7 @@ var Lander = function() {
   var
     INITIAL_COORDINATES = {X: 50, Y: 50},
     LANDER_SIZE = 40,
-    SPRITE_INDEX = { DEFAULT: 0, BOOSTING: 1, DESTROYED: 2 },
+    SPRITE_INDEX = { DEFAULT: 0, BOOSTING: 1, DESTROYED: 2, FAIL: 3 },
 
     frame = new Rectangle(LANDER_SIZE, LANDER_SIZE),
     spriteSheet = new SpriteSheet('res/lander.png', frame),
@@ -11,6 +11,7 @@ var Lander = function() {
     boost = new Acceleration(0, -0.2),
 
     currentLevel,
+    hostageCount,
 
     position,
     lastPosition,
@@ -20,6 +21,7 @@ var Lander = function() {
     boosting,
     destroyed,
     landed,
+    failedRescue,
 
     _clearPosition = function(context, pos) {
       // Clear a rectangle 1 pixel larger than the sprite
@@ -37,9 +39,11 @@ var Lander = function() {
     };
 
   this.reset = function() {
+    hostageCount = 0;
     boosting = false;
     destroyed = false;
     landed = false;
+    failedRescue = false;
     shiftDirection = Shift.NONE;
     position = new Position(INITIAL_COORDINATES.X, INITIAL_COORDINATES.Y);
     speed = new Speed(0, 0);
@@ -59,7 +63,7 @@ var Lander = function() {
   };
 
   this.update = function() {
-    if (!destroyed) {
+    if (!destroyed && !failedRescue) {
       if (!landed) {
         position.shift(shiftDirection.speed());
         speed.accelerate(gravity);
@@ -84,6 +88,8 @@ var Lander = function() {
       } else if (_topCollision()) {
         destroyed = true;
         speed.reset();
+      } else if (currentLevel.exitReached(position)) {
+        failedRescue = (hostageCount == 0);
       }
     }
   };
@@ -93,6 +99,8 @@ var Lander = function() {
 
     if (destroyed) {
       spriteIndex = SPRITE_INDEX.DESTROYED;
+    } else if (failedRescue) {
+      spriteIndex = SPRITE_INDEX.FAIL;
     } else if (boosting) {
       spriteIndex = SPRITE_INDEX.BOOSTING;
     }

@@ -15,5 +15,9 @@ var Speed = function(hor, ver) {
   this.reset = function() {
     hor = 0;
     ver = 0;
-  }
+  };
+
+  this.stopVertical = function() {
+    hor = 0;
+  };
 };

@@ -4,6 +4,9 @@ var Level = function(_levelMatrix) {
       ' ': function(context, cell) {
 
       },
+      'E': function(context, cell) {
+
+      },
       'W': function(context, cell) {
         context.fillRect(
           cell.columnIndex() * cell.width(),
@@ -22,7 +25,19 @@ var Level = function(_levelMatrix) {
     },
 
     height, width,
-    grid = new Grid(_levelMatrix);
+    grid = new Grid(_levelMatrix),
+
+    _checkCollision = function(position) {
+      if (height && width) {
+        var
+          cellX = Math.floor(position.x() / (width / grid.columns())),
+          cellY = Math.floor(position.y() / (height / grid.rows()));
+
+        return _levelMatrix[cellY][cellX];
+      }
+
+      return '';
+    };
 
   this.draw = function(context) {
     height = context.canvas.height;
@@ -31,20 +46,16 @@ var Level = function(_levelMatrix) {
   };
 
   this.wallsCollideWith = function(position) {
-    if (height && width) {
-      var
-        cellX = Math.floor(position.x() / (width / grid.columns())),
-        cellY = Math.floor(position.y() / (height / grid.rows()));
-
-      return _levelMatrix[cellY][cellX] === 'W';
-    }
-
-    return false;
+    return _checkCollision(position) === 'W';
   };
+
+  this.exitReached = function(position) {
+    return _checkCollision(position) === 'E';
+  }
 };
 
 Level.ONE = new Level([
-  'WWWWWWWWWWWWWWWWWWWW',
+  'WEEEEEEWWWWWWWWWWWWW',
   'W                  W',
   'W                  W',
   'W                  W',
