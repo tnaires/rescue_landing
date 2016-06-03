@@ -10,6 +10,10 @@ var Level = function(_levelMatrix) {
           cell.rowIndex() * cell.height(),
           cell.width(),
           cell.height());
+      },
+      'H': function(context, cell) {
+        var hostage = new Hostage(200, 200);
+        hostage.render(context);
       }
     },
 
@@ -45,7 +49,7 @@ Level.ONE = new Level([
   'W                  W',
   'W                  W',
   'W                  W',
-  'W                  W',
+  'W         H        W',
   'W                  W',
   'W                  W',
   'W                  W',

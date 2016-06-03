@@ -30,9 +30,6 @@ var RescueLand = function() {
       lander = new Lander();
       lander.setCurrentLevel(currentLevel);
       screen.add(lander);
-
-      var hostage = new Hostage();
-      screen.add(hostage);
     },
 
     _setupBackground = function(resolution) {
