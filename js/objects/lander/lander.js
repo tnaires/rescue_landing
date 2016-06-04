@@ -38,10 +38,14 @@ var Lander = function() {
     };
 
   this.reset = function() {
+    hostageCount = currentLevel.hostageCount();
+    currentLevel.reset();
+
     boosting = false;
     destroyed = false;
     landed = false;
     failedRescue = false;
+
     shiftDirection = Shift.NONE;
     position = new Position(INITIAL_COORDINATES.X, INITIAL_COORDINATES.Y);
     speed = new Speed(0, 0);
@@ -49,7 +53,6 @@ var Lander = function() {
 
   this.setCurrentLevel = function(_currentLevel) {
     currentLevel = _currentLevel;
-    hostageCount = currentLevel.hostageCount();
     this.reset();
   };
 

@@ -35,6 +35,10 @@ var Hostage = function(_cell) {
     rescued = true;
   };
 
+  this.reset = function() {
+    rescued = false;
+  }
+
   this.alreadyRescued = function() {
     return rescued;
   };

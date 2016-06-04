@@ -82,6 +82,12 @@ var Level = function(_levelMatrix) {
   this.hostageCount = function() {
     return grid.count('H');
   };
+
+  this.reset = function() {
+    for (var i = 0; i < hostages.length; i++) {
+      hostages[i].reset();
+    }
+  }
 };
 
 Level.ONE = new Level([
