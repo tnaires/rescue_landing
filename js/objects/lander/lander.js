@@ -90,6 +90,20 @@ var Lander = function() {
       } else if (currentLevel.exitReached(position)) {
         failedRescue = (hostageCount != 0);
       }
+
+      if (landed) {
+        var
+          positionToCheck = new Position(
+            position.x() + LANDER_SIZE / 2,
+            position.y() + (LANDER_SIZE - Hostage.SIZE)
+          ),
+          hostage = currentLevel.hostageAtPosition(positionToCheck);
+
+        if (hostage && !hostage.alreadyRescued()) {
+          hostageCount--;
+          hostage.rescue();
+        }
+      }
     }
   };
 

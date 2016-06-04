@@ -1,5 +1,7 @@
 var Level = function(_levelMatrix) {
   var
+    hostages = [],
+
     RENDER_MAP = {
       ' ': function(context, cell) {
 
@@ -15,11 +17,9 @@ var Level = function(_levelMatrix) {
           cell.height());
       },
       'H': function(context, cell) {
-        var
-          x = cell.columnIndex() * cell.width() + ((cell.width() - Hostage.SIZE) / 2),
-          y = cell.rowIndex() * cell.height() + (cell.height() - Hostage.SIZE - 1),
-          hostage = new Hostage(new Position(x, y));
+        var hostage = new Hostage(cell);
 
+        hostages.push(hostage);
         hostage.render(context);
       }
     },
@@ -27,11 +27,19 @@ var Level = function(_levelMatrix) {
     height, width,
     grid = new Grid(_levelMatrix),
 
+    _cellX = function(x) {
+      return Math.floor(x / (width / grid.columns()));
+    },
+
+    _cellY = function(y) {
+      return Math.floor(y / (height / grid.rows()));
+    },
+
     _checkCollision = function(position) {
       if (height && width) {
         var
-          cellX = Math.floor(position.x() / (width / grid.columns())),
-          cellY = Math.floor(position.y() / (height / grid.rows()));
+          cellX = _cellX(position.x()),
+          cellY = _cellY(position.y());
 
         return _levelMatrix[cellY][cellX];
       }
@@ -51,6 +59,24 @@ var Level = function(_levelMatrix) {
 
   this.exitReached = function(position) {
     return _checkCollision(position) === 'E';
+  };
+
+  this.hostageAtPosition = function(position) {
+    var result;
+
+    if (_checkCollision(position) === 'H') {
+      for (var i = 0; i < hostages.length; i++) {
+        var hostage = hostages[i];
+
+        if (_cellX(position.x()) == hostage.cell().columnIndex() &&
+            _cellY(position.y()) == hostage.cell().rowIndex()) {
+          result = hostage;
+          break;
+        }
+      }
+    }
+
+    return result;
   };
 
   this.hostageCount = function() {
