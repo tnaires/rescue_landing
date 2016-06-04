@@ -2,7 +2,8 @@ var Lander = function() {
   var
     INITIAL_COORDINATES = {X: 50, Y: 50},
     LANDER_SIZE = 40,
-    SPRITE_INDEX = { DEFAULT: 0, BOOSTING: 1, DESTROYED: 2, FAIL: 3 },
+    SPRITE_INDEX = { DEFAULT: 0, BOOSTING: 1, DESTROYED: 2, FAIL: 3, DONE: 4 },
+    FALL_SPEED_LIMIT = 2,
 
     frame = new Rectangle(LANDER_SIZE, LANDER_SIZE),
     spriteSheet = new SpriteSheet('res/lander.png', frame),
@@ -22,6 +23,7 @@ var Lander = function() {
     destroyed,
     landed,
     failedRescue,
+    successRescue,
 
     _clearPosition = function(context, pos) {
       context.clearRect(pos.x() - 1, pos.y() - 1, frame.width() + 2, frame.height() + 2);
@@ -45,6 +47,7 @@ var Lander = function() {
     destroyed = false;
     landed = false;
     failedRescue = false;
+    successRescue = false;
 
     shiftDirection = Shift.NONE;
     position = new Position(INITIAL_COORDINATES.X, INITIAL_COORDINATES.Y);
@@ -65,7 +68,7 @@ var Lander = function() {
   };
 
   this.update = function() {
-    if (!destroyed && !failedRescue) {
+    if (!destroyed && !failedRescue && !successRescue) {
       if (!landed) {
         position.shift(shiftDirection.speed());
         speed.accelerate(gravity);
@@ -80,7 +83,7 @@ var Lander = function() {
       position.shift(speed);
 
       if (_bottomCollision()) {
-        if (_topCollision() || speed.vertical() > 2) {
+        if (_topCollision() || speed.vertical() > FALL_SPEED_LIMIT) {
           destroyed = true;
         } else {
           landed = true;
@@ -92,6 +95,7 @@ var Lander = function() {
         speed.reset();
       } else if (currentLevel.exitReached(position)) {
         failedRescue = (hostageCount != 0);
+        successRescue = (hostageCount == 0);
       }
 
       if (landed) {
@@ -117,6 +121,8 @@ var Lander = function() {
       spriteIndex = SPRITE_INDEX.DESTROYED;
     } else if (failedRescue) {
       spriteIndex = SPRITE_INDEX.FAIL;
+    } else if (successRescue) {
+      spriteIndex = SPRITE_INDEX.DONE;
     } else if (boosting) {
       spriteIndex = SPRITE_INDEX.BOOSTING;
     }

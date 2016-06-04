@@ -105,6 +105,6 @@ Level.ONE = new Level([
   'W                  W',
   'W                  W',
   'W                  W',
-  'W         H        W',
+  'W        H         W',
   'WWWWWWWWWWWWWWWWWWWW'
 ]);
