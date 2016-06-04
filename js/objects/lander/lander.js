@@ -59,6 +59,10 @@ var Lander = function() {
     this.reset();
   };
 
+  this.currentLevel = function() {
+    return currentLevel;
+  };
+
   this.clear = function(context) {
     if (lastPosition) {
       _clearPosition(context, lastPosition);

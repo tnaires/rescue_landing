@@ -1,6 +1,6 @@
 var RescueLand = function() {
   var
-    fps, screen, background, inputHandler, lander, currentLevel,
+    fps, screen, background, inputHandler, lander,
 
     _registerInputCallbacks = function() {
       inputHandler.registerCallback(InputHandler.ON_KEY_DOWN, InputHandler.SPACE, lander.reset);
@@ -28,7 +28,7 @@ var RescueLand = function() {
       screen.init('lander');
 
       lander = new Lander();
-      lander.setCurrentLevel(currentLevel);
+      lander.setCurrentLevel(Level.ONE);
       screen.add(lander);
     },
 
@@ -36,13 +36,12 @@ var RescueLand = function() {
       background = new Screen(resolution.width, resolution.height);
 
       background.init('background');
-      background.add(currentLevel);
+      background.add(lander.currentLevel());
       background.draw();
     };
 
   this.setUp = function(_fps, resolution) {
     fps = _fps;
-    currentLevel = Level.ONE;
 
     _setupLander(resolution);
     _setupBackground(resolution);

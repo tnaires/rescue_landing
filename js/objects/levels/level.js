@@ -26,6 +26,7 @@ var Level = function(_levelMatrix) {
 
     height, width,
     grid = new Grid(_levelMatrix),
+    nextLevel,
 
     _cellX = function(x) {
       return Math.floor(x / (width / grid.columns()));
@@ -87,24 +88,13 @@ var Level = function(_levelMatrix) {
     for (var i = 0; i < hostages.length; i++) {
       hostages[i].reset();
     }
-  }
-};
+  };
 
-Level.ONE = new Level([
-  'WEEEEEEWWWWWWWWWWWWW',
-  'W                  W',
-  'W                  W',
-  'W                  W',
-  'W                  W',
-  'W                  W',
-  'W                  W',
-  'W                  W',
-  'W                  W',
-  'W                  W',
-  'W                  W',
-  'W                  W',
-  'W                  W',
-  'W                  W',
-  'W        H         W',
-  'WWWWWWWWWWWWWWWWWWWW'
-]);
+  this.setNextLevel = function(_nextLevel) {
+    nextLevel = _nextLevel;
+  };
+
+  this.nextLevel = function() {
+    return nextLevel;
+  };
+};
