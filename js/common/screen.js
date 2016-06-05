@@ -24,6 +24,10 @@ var Screen = function(_width, _height) {
     context = canvas.getContext('2d');
   };
 
+  this.eraseObjects = function() {
+    objects = [];
+  };
+
   this.add = function(object) {
     objects.push(object);
   };

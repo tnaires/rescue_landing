@@ -48,6 +48,11 @@ var Level = function(_levelMatrix) {
       return '';
     };
 
+  this.clear = function(context) {
+    var canvas = context.canvas;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  };
+
   this.draw = function(context) {
     height = context.canvas.height;
     width = context.canvas.width;

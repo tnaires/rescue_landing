@@ -111,6 +111,10 @@ var Lander = function() {
       } else if (currentLevel.exitReached(position)) {
         failedRescue = (hostageCount != 0);
         successRescue = (hostageCount == 0);
+
+        if (successRescue) {
+          currentLevel = currentLevel.nextLevel();
+        }
       }
 
       if (landed) {

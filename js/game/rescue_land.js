@@ -2,8 +2,16 @@ var RescueLand = function() {
   var
     fps, screen, background, inputHandler, lander,
 
+    _reset = function() {
+      lander.reset();
+      background.clear();
+      background.eraseObjects();
+      background.add(lander.currentLevel());
+      background.draw();
+    },
+
     _registerInputCallbacks = function() {
-      inputHandler.registerCallback(InputHandler.ON_KEY_DOWN, InputHandler.SPACE, lander.reset);
+      inputHandler.registerCallback(InputHandler.ON_KEY_DOWN, InputHandler.SPACE, _reset);
 
       inputHandler.registerCallback(InputHandler.ON_KEY_DOWN, InputHandler.ARROW_UP, lander.boost);
       inputHandler.registerCallback(InputHandler.ON_KEY_UP, InputHandler.ARROW_UP, lander.release);
@@ -28,7 +36,7 @@ var RescueLand = function() {
       screen.init('lander');
 
       lander = new Lander();
-      lander.setCurrentLevel(Level.TWO);
+      lander.setCurrentLevel(Level.ONE);
       screen.add(lander);
     },
 
