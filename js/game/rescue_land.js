@@ -28,7 +28,7 @@ var RescueLand = function() {
       screen.init('lander');
 
       lander = new Lander();
-      lander.setCurrentLevel(Level.ONE);
+      lander.setCurrentLevel(Level.TWO);
       screen.add(lander);
     },
 

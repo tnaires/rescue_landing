@@ -31,7 +31,18 @@ var Lander = function() {
 
     _bottomCollision = function() {
       return currentLevel.wallsCollideWith(position.plus(0, LANDER_SIZE)) ||
+        currentLevel.wallsCollideWith(position.plus(LANDER_SIZE / 2, LANDER_SIZE)) ||
         currentLevel.wallsCollideWith(position.plus(LANDER_SIZE, LANDER_SIZE));
+    },
+
+    _notLandedProperly = function() {
+      var
+        leftBottomCornerCollision = currentLevel.wallsCollideWith(position.plus(0, LANDER_SIZE)),
+        middleBottomCollision = currentLevel.wallsCollideWith(position.plus(LANDER_SIZE / 2, LANDER_SIZE)),
+        rightBottomCornerCollision = currentLevel.wallsCollideWith(position.plus(LANDER_SIZE, LANDER_SIZE));
+
+      return leftBottomCornerCollision && !middleBottomCollision && !rightBottomCornerCollision ||
+             !leftBottomCornerCollision && !middleBottomCollision && rightBottomCornerCollision;
     },
 
     _topCollision = function() {
@@ -87,7 +98,7 @@ var Lander = function() {
       position.shift(speed);
 
       if (_bottomCollision()) {
-        if (_topCollision() || speed.vertical() > FALL_SPEED_LIMIT) {
+        if (_notLandedProperly() || _topCollision() || speed.vertical() > FALL_SPEED_LIMIT) {
           destroyed = true;
         } else {
           landed = true;
