@@ -11,12 +11,9 @@ Where to play
 
 Access http://tnaires.github.com/rescue_landing/ to play the alpha (I said **ALPHA!**) version.
 
-How to play
------------
+How to play (and more)
+----------------------
 
-- Arrow up: boost lander
-- Arrow left: shift lander to the left
-- Arrow right: shift lander to the right
-- Space: restart stage / go to next stage when finished
+Check out [our wiki](https://github.com/tnaires/rescue_landing/wiki).
 
-**Note**: this document is a work in progress.
+**Note**: this project is a work in progress.
