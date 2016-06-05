@@ -14,6 +14,6 @@ Access http://tnaires.github.com/rescue_landing/ to play the alpha (I said **ALP
 How to play (and more)
 ----------------------
 
-Check out [our wiki](https://github.com/tnaires/rescue_landing/wiki).
+Check out [the project wiki](https://github.com/tnaires/rescue_landing/wiki).
 
 **Note**: this project is a work in progress.
