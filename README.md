@@ -17,6 +17,6 @@ How to play
 - Arrow up: boost lander
 - Arrow left: shift lander to the left
 - Arrow right: shift lander to the right
-- Space: restart stage
+- Space: restart stage / go to next stage when finished
 
 **Note**: this document is a work in progress.
