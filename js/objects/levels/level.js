@@ -49,11 +49,17 @@ var Level = function(_levelMatrix) {
     };
 
   this.clear = function(context) {
+    for (var i = 0; i < hostages.length; i++) {
+      hostages[i].clear(context);
+    }
+
     var canvas = context.canvas;
     context.clearRect(0, 0, canvas.width, canvas.height);
   };
 
   this.draw = function(context) {
+    hostages = [];
+
     height = context.canvas.height;
     width = context.canvas.width;
     grid.render(context, RENDER_MAP);

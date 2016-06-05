@@ -6,6 +6,8 @@ var Hostage = function(_cell) {
     frame = new Rectangle(Hostage.SIZE, Hostage.SIZE),
     spriteSheet = new SpriteSheet('res/hostage.png', frame),
 
+    cycleHandler,
+
     currentImageIndex = IMAGE_INDEX_ORDER[0],
     rescued = false,
 
@@ -24,7 +26,11 @@ var Hostage = function(_cell) {
     };
 
   this.render = function(context) {
-    setInterval(_cycle, IMAGE_INDEX_CHANGE_TIME, context);
+    cycleHandler = setInterval(_cycle, IMAGE_INDEX_CHANGE_TIME, context);
+  };
+
+  this.clear = function(context) {
+    clearInterval(cycleHandler);
   };
 
   this.cell = function() {
