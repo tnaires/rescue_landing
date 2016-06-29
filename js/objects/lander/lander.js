@@ -15,7 +15,6 @@ var Lander = function() {
     hostageCount,
 
     position,
-    lastPosition,
     speed,
     shiftDirection,
 
@@ -25,8 +24,8 @@ var Lander = function() {
     failedRescue,
     successRescue,
 
-    _clearPosition = function(context, pos) {
-      context.clearRect(pos.x() - 1, pos.y() - 1, frame.width() + 2, frame.height() + 2);
+    _moveToNextLevel = function() {
+      currentLevel = currentLevel.nextLevel();
     },
 
     _bottomCollision = function() {
@@ -50,24 +49,30 @@ var Lander = function() {
         currentLevel.wallsCollideWith(position.plus(LANDER_SIZE, 0));
     };
 
-  this.reset = function() {
-    hostageCount = currentLevel.hostageCount();
-    currentLevel.reset();
+  this.reset = function(loadNextLevel) {
+    if (loadNextLevel && (!currentLevel.playable() || successRescue)) {
+      _moveToNextLevel();
+    }
 
-    boosting = false;
-    destroyed = false;
-    landed = false;
-    failedRescue = false;
-    successRescue = false;
+    if (currentLevel.playable()) {
+      hostageCount = currentLevel.hostageCount();
+      currentLevel.reset();
 
-    shiftDirection = Shift.NONE;
-    position = new Position(INITIAL_COORDINATES.X, INITIAL_COORDINATES.Y);
-    speed = new Speed(0, 0);
+      boosting = false;
+      destroyed = false;
+      landed = false;
+      failedRescue = false;
+      successRescue = false;
+
+      shiftDirection = Shift.NONE;
+      position = new Position(INITIAL_COORDINATES.X, INITIAL_COORDINATES.Y);
+      speed = new Speed(0, 0);
+    }
   };
 
   this.setCurrentLevel = function(_currentLevel) {
     currentLevel = _currentLevel;
-    this.reset();
+    this.reset(false);
   };
 
   this.currentLevel = function() {
@@ -75,15 +80,12 @@ var Lander = function() {
   };
 
   this.clear = function(context) {
-    if (lastPosition) {
-      _clearPosition(context, lastPosition);
-    }
-
-    _clearPosition(context, position);
+    var canvas = context.canvas;
+    context.clearRect(0, 0, canvas.width, canvas.height);
   };
 
   this.update = function() {
-    if (!destroyed && !failedRescue && !successRescue) {
+    if (currentLevel.playable() && !destroyed && !failedRescue && !successRescue) {
       if (!landed) {
         position.shift(shiftDirection.speed());
         speed.accelerate(gravity);
@@ -94,7 +96,6 @@ var Lander = function() {
         speed.accelerate(boost);
       };
 
-      lastPosition = position;
       position.shift(speed);
 
       if (_bottomCollision()) {
@@ -111,10 +112,6 @@ var Lander = function() {
       } else if (currentLevel.exitReached(position)) {
         failedRescue = (hostageCount != 0);
         successRescue = (hostageCount == 0);
-
-        if (successRescue) {
-          currentLevel = currentLevel.nextLevel();
-        }
       }
 
       if (landed) {
@@ -134,19 +131,21 @@ var Lander = function() {
   };
 
   this.draw = function(context) {
-    var spriteIndex = SPRITE_INDEX.DEFAULT;
+    if (currentLevel.playable()) {
+      var spriteIndex = SPRITE_INDEX.DEFAULT;
 
-    if (destroyed) {
-      spriteIndex = SPRITE_INDEX.DESTROYED;
-    } else if (failedRescue) {
-      spriteIndex = SPRITE_INDEX.FAIL;
-    } else if (successRescue) {
-      spriteIndex = SPRITE_INDEX.DONE;
-    } else if (boosting) {
-      spriteIndex = SPRITE_INDEX.BOOSTING;
+      if (destroyed) {
+        spriteIndex = SPRITE_INDEX.DESTROYED;
+      } else if (failedRescue) {
+        spriteIndex = SPRITE_INDEX.FAIL;
+      } else if (successRescue) {
+        spriteIndex = SPRITE_INDEX.DONE;
+      } else if (boosting) {
+        spriteIndex = SPRITE_INDEX.BOOSTING;
+      }
+
+      spriteSheet.draw(spriteIndex, position, context);
     }
-
-    spriteSheet.draw(spriteIndex, position, context);
   };
 
   this.boost = function() {

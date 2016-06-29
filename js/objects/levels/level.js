@@ -108,4 +108,8 @@ var Level = function(_levelMatrix) {
   this.nextLevel = function() {
     return nextLevel;
   };
+
+  this.playable = function() {
+    return true;
+  };
 };

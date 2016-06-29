@@ -3,7 +3,8 @@ var RescueLand = function() {
     fps, screen, background, inputHandler, lander,
 
     _reset = function() {
-      lander.reset();
+      lander.reset(true);
+
       background.clear();
       background.eraseObjects();
       background.add(lander.currentLevel());
@@ -36,7 +37,7 @@ var RescueLand = function() {
       screen.init('lander');
 
       lander = new Lander();
-      lander.setCurrentLevel(Level.ONE);
+      lander.setCurrentLevel(Level.TITLE);
       screen.add(lander);
     },
 
