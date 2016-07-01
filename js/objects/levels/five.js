@@ -15,4 +15,4 @@ Level.FIVE = new Level([
   'W                  W',
   'W                  W',
   'WWWWWWWWWWWWWWWWWWWW'
-], 350);
+], 350, CelestialBody.EARTH);

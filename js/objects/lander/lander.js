@@ -8,7 +8,6 @@ var Lander = function() {
     frame = new Rectangle(LANDER_SIZE, LANDER_SIZE),
     spriteSheet = new SpriteSheet('res/lander.png', frame),
 
-    gravity = new Acceleration(0, 0.05),
     boost = new Acceleration(0, -0.2),
 
     currentLevel,
@@ -90,7 +89,7 @@ var Lander = function() {
     if (currentLevel.playable() && !destroyed && !failedRescue && !successRescue) {
       if (!landed) {
         position.shift(shiftDirection.speed());
-        speed.accelerate(gravity);
+        speed.accelerate(currentLevel.celestialBody().gravity());
       }
 
       if (boosting && fuel > 0) {

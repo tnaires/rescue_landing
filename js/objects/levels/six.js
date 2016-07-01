@@ -15,4 +15,4 @@ Level.SIX = new Level([
   'W                  W',
   'W                  W',
   'WWWWWWWWWWWWWWWWWWWW'
-], 420);
+], 420, CelestialBody.EARTH);
