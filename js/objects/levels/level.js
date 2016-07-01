@@ -1,4 +1,4 @@
-var Level = function(_levelMatrix) {
+var Level = function(_levelMatrix, _fuel) {
   var
     hostages = [],
 
@@ -111,5 +111,9 @@ var Level = function(_levelMatrix) {
 
   this.playable = function() {
     return true;
+  };
+
+  this.fuel = function() {
+    return _fuel;
   };
 };

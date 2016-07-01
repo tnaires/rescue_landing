@@ -39,6 +39,9 @@ var RescueLand = function() {
       lander = new Lander();
       lander.setCurrentLevel(Level.TITLE);
       screen.add(lander);
+
+      var fuelBar = new FuelBar(lander);
+      screen.add(fuelBar);
     },
 
     _setupBackground = function(resolution) {

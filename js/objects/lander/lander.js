@@ -17,6 +17,7 @@ var Lander = function() {
     position,
     speed,
     shiftDirection,
+    fuel,
 
     boosting,
     destroyed,
@@ -65,6 +66,7 @@ var Lander = function() {
       successRescue = false;
 
       shiftDirection = Shift.NONE;
+      fuel = currentLevel.fuel();
       position = new Position(INITIAL_COORDINATES.X, INITIAL_COORDINATES.Y);
       speed = new Speed(0, 0);
     }
@@ -91,9 +93,10 @@ var Lander = function() {
         speed.accelerate(gravity);
       }
 
-      if (boosting) {
+      if (boosting && fuel > 0) {
         landed = false;
         speed.accelerate(boost);
+        fuel--;
       };
 
       position.shift(speed);
@@ -140,12 +143,16 @@ var Lander = function() {
         spriteIndex = SPRITE_INDEX.FAIL;
       } else if (successRescue) {
         spriteIndex = SPRITE_INDEX.DONE;
-      } else if (boosting) {
+      } else if (boosting && fuel > 0) {
         spriteIndex = SPRITE_INDEX.BOOSTING;
       }
 
       spriteSheet.draw(spriteIndex, position, context);
     }
+  };
+
+  this.currentFuel = function() {
+    return fuel;
   };
 
   this.boost = function() {
