@@ -15,4 +15,4 @@ Level.SIX = new Level([
   'W                  W',
   'W                  W',
   'WWWWWWWWWWWWWWWWWWWW'
-], 100);
+], 420);

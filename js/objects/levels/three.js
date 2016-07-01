@@ -15,4 +15,4 @@ Level.THREE = new Level([
   'W                  W',
   'W  H               W',
   'WWWWWWWWWWWWWWWWWWWW'
-], 100);
+], 280);

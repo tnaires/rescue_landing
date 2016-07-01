@@ -103,6 +103,7 @@ var Level = function(_levelMatrix, _fuel) {
 
   this.setNextLevel = function(_nextLevel) {
     nextLevel = _nextLevel;
+    return _nextLevel;
   };
 
   this.nextLevel = function() {

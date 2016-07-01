@@ -13,6 +13,7 @@ var Info = function(drawCallback) {
 
   this.setNextLevel = function(_nextLevel) {
     nextLevel = _nextLevel;
+    return _nextLevel;
   };
 
   this.nextLevel = function() {
