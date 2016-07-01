@@ -9,7 +9,7 @@ This is an in-development lander-style game. The goal is to go through the stage
 Where to play
 -------------
 
-Access http://tnaires.github.com/rescue_landing/ to play the alpha (I said **ALPHA!**) version.
+Access http://tnaires.github.com/rescue_landing/ to play the current version.
 
 How to play (and more)
 ----------------------
