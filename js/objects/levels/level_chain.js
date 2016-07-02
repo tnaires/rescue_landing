@@ -9,5 +9,7 @@ Level.TITLE
   .setNextLevel(Level.EIGHT)
   .setNextLevel(Level.NINE)
   .setNextLevel(Level.TEN)
+  .setNextLevel(Level.ELEVEN)
+  .setNextLevel(Level.TWELVE)
   .setNextLevel(Level.END)
   .setNextLevel(Level.TITLE);

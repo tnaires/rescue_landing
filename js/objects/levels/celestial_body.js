@@ -21,3 +21,4 @@ var CelestialBody = function(_name, _gameGravity, _realWorldGravity, _landColor,
 
 CelestialBody.EARTH = new CelestialBody('Earth', 0.05, 9.8, '#663300', '#CCFF99');
 CelestialBody.MOON = new CelestialBody('Moon', 0.005, 1.662, '#555555', '#DDDDDD');
+CelestialBody.JUPITER = new CelestialBody('Jupiter', 0.15, 24.79, '#990000', '#FFCCCC');
