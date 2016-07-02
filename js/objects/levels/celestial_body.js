@@ -1,9 +1,22 @@
-var CelestialBody = function(_gravity) {
-  var gravityAcceleration = new Acceleration(0, _gravity);
+var CelestialBody = function(_name, _gameGravity, _realWorldGravity, _landColor, _backgroundColor) {
+  var
+    gravityAcceleration = new Acceleration(0, _gameGravity);
 
   this.gravity = function() {
     return gravityAcceleration;
-  }
+  };
+
+  this.info = function() {
+    return _name + ': ' + _realWorldGravity + ' m/s\u00B2';
+  };
+
+  this.landColor = function() {
+    return _landColor;
+  };
+
+  this.backgroundColor = function() {
+    return _backgroundColor;
+  };
 };
 
-CelestialBody.EARTH = new CelestialBody(0.05);
+CelestialBody.EARTH = new CelestialBody('Earth', 0.05, 9.8, '#663300', '#CCFF99');

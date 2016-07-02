@@ -1,7 +1,4 @@
 var Grid = function(_matrix) {
-  var
-    FILL_COLOR = '#000000';
-
   this.rows = function() {
     return _matrix.length;
   };
@@ -31,13 +28,15 @@ var Grid = function(_matrix) {
     context.stroke();
   };
 
-  this.render = function(context, renderMap) {
+  this.render = function(context, renderMap, fillColor, backgroundColor) {
     var
       canvas = context.canvas,
       rowHeight = canvas.height / this.rows(),
       columnWidth = canvas.width / this.columns();
 
-    context.fillStyle = FILL_COLOR;
+    context.fillStyle = backgroundColor;
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = fillColor;
 
     for (var i = 0; i < _matrix.length; i++) {
       var row = _matrix[i];

@@ -7,6 +7,7 @@ var Hostage = function(_cell) {
     spriteSheet = new SpriteSheet('res/hostage.png', frame),
 
     cycleHandler,
+    backgroundColor,
 
     currentImageIndex = IMAGE_INDEX_ORDER[0],
     rescued = false,
@@ -17,7 +18,8 @@ var Hostage = function(_cell) {
     ),
 
     _cycle = function(context) {
-      context.clearRect(position.x() - 1, position.y() - 1, frame.width() + 2, frame.height() + 2);
+      context.fillStyle = backgroundColor;
+      context.fillRect(position.x() - 1, position.y() - 1, frame.width() + 2, frame.height() + 2);
 
       if (!rescued) {
         currentImageIndex = (currentImageIndex + 1) % 4;
@@ -25,7 +27,8 @@ var Hostage = function(_cell) {
       }
     };
 
-  this.render = function(context) {
+  this.render = function(context, _backgroundColor) {
+    backgroundColor = _backgroundColor;
     cycleHandler = setInterval(_cycle, IMAGE_INDEX_CHANGE_TIME, context);
   };
 

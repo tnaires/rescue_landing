@@ -20,7 +20,7 @@ var Level = function(_levelMatrix, _fuel, _celestialBody) {
         var hostage = new Hostage(cell);
 
         hostages.push(hostage);
-        hostage.render(context);
+        hostage.render(context, _celestialBody.backgroundColor());
       }
     },
 
@@ -62,7 +62,11 @@ var Level = function(_levelMatrix, _fuel, _celestialBody) {
 
     height = context.canvas.height;
     width = context.canvas.width;
-    grid.render(context, RENDER_MAP);
+    grid.render(context, RENDER_MAP, _celestialBody.landColor(), _celestialBody.backgroundColor());
+
+    context.font = '15px "Lucida Console", Monaco, monospace';
+    context.fillStyle = '#FFFFFF';
+    context.fillText(_celestialBody.info(), 110, 470);
   };
 
   this.wallsCollideWith = function(position) {
