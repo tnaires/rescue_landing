@@ -1,6 +1,7 @@
 Level.END = new Info(function(context) {
   var canvas = context.canvas;
   context.textAlign = 'center';
+  context.fillStyle = '#000000';
 
   context.font = 'bold 100px "Lucida Console", Monaco, monospace';
   context.fillText('CONGRATZ!', canvas.width / 2, 120);
