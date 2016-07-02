@@ -8,9 +8,9 @@ This is an in-development lander-style game. The goal is to go through the stage
 
 Screenshots
 -----------
-![Earth](res/screenshots/earth.png)
-![Moon](res/screenshots/moon.png)
-![Jupiter](res/screenshots/jupiter.png)
+![Earth](res/screenshots/earth.png =320x240)
+![Moon](res/screenshots/moon.png =320x240)
+![Jupiter](res/screenshots/jupiter.png =320x240)
 
 Where to play
 -------------
