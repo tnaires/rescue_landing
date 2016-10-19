@@ -35,5 +35,5 @@ Level.HELP = new Info(function(context) {
   context.textAlign = 'center';
   context.fillStyle = '#000055';
   context.font = '20px "Lucida Console", Monaco, monospace';
-  context.fillText('Press SPACE to begin', canvas.width / 2, 440);
+  context.fillText('Press SPACE to begin', canvas.width / 2, 415);
 });
