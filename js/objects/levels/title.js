@@ -12,5 +12,5 @@ Level.TITLE = new Info(function(context) {
 
   context.fillStyle = '#FFFFFF';
   context.font = '20px "Lucida Console", Monaco, monospace';
-  context.fillText('Press SPACE to begin', canvas.width / 2, 400);
+  context.fillText('Press SPACE', canvas.width / 2, 400);
 });
