@@ -26,7 +26,7 @@ Level.HELP = new Info(function(context) {
 
     context.fillStyle = '#EE0000';
     context.font = 'bold 20px "Lucida Console", Monaco, monospace';
-    context.fillText('Whatch your fuel!', canvas.width / 2, 320);
+    context.fillText('Watch your fuel!', canvas.width / 2, 320);
   };
 
   context.font = 'bold 20px "Lucida Console", Monaco, monospace';
