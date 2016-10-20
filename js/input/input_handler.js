@@ -38,3 +38,4 @@ InputHandler.ARROW_LEFT = 37;
 InputHandler.ARROW_UP = 38;
 InputHandler.ARROW_RIGHT = 39;
 InputHandler.ARROW_DOWN = 40;
+InputHandler.ENTER = 13;

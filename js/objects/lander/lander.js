@@ -4,6 +4,7 @@ var Lander = function() {
     LANDER_SIZE = 40,
     SPRITE_INDEX = { DEFAULT: 0, BOOSTING: 1, DESTROYED: 2, FAIL: 3, DONE: 4 },
     FALL_SPEED_LIMIT = 2,
+    FUEL_REPLENISHMENT_PERCENTAGE = 0.2,
 
     frame = new Rectangle(LANDER_SIZE, LANDER_SIZE),
     spriteSheet = new SpriteSheet('res/lander.png', frame),
@@ -12,6 +13,7 @@ var Lander = function() {
 
     currentLevel,
     hostageCount,
+    hardMode = false,
 
     position,
     speed,
@@ -47,7 +49,22 @@ var Lander = function() {
     _topCollision = function() {
       return currentLevel.wallsCollideWith(position) ||
         currentLevel.wallsCollideWith(position.plus(LANDER_SIZE, 0));
+    },
+
+    _replenishFuel = function() {
+      var replenishment = Math.floor(FUEL_REPLENISHMENT_PERCENTAGE * currentLevel.fuel());
+      console.log(replenishment);
+
+      if (fuel + replenishment > currentLevel.fuel()) {
+        fuel = currentLevel.fuel();
+      } else {
+        fuel += replenishment;
+      }
     };
+
+  this.setHardModeOn = function() {
+    hardMode = true;
+  };
 
   this.reset = function(loadNextLevel) {
     if (loadNextLevel && (!currentLevel.playable() || successRescue)) {
@@ -127,6 +144,10 @@ var Lander = function() {
         if (hostage && !hostage.alreadyRescued()) {
           hostageCount--;
           hostage.rescue();
+
+          if (!hardMode) {
+            _replenishFuel();
+          }
         }
       }
     }

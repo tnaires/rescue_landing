@@ -11,8 +11,17 @@ var RescueLand = function() {
       background.draw();
     },
 
+    _setHardDifficulty = function() {
+      if (lander.currentLevel() === Level.DIFFICULTY) {
+        lander.setHardModeOn();
+        _reset();
+      }
+    },
+
     _registerInputCallbacks = function() {
       inputHandler.registerCallback(InputHandler.ON_KEY_DOWN, InputHandler.SPACE, _reset);
+
+      inputHandler.registerCallback(InputHandler.ON_KEY_UP, InputHandler.ENTER, _setHardDifficulty);
 
       inputHandler.registerCallback(InputHandler.ON_KEY_DOWN, InputHandler.ARROW_UP, lander.boost);
       inputHandler.registerCallback(InputHandler.ON_KEY_UP, InputHandler.ARROW_UP, lander.release);

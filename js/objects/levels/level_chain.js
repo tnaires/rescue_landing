@@ -1,5 +1,6 @@
 Level.TITLE
   .setNextLevel(Level.HELP)
+  .setNextLevel(Level.DIFFICULTY)
   .setNextLevel(Level.ONE)
   .setNextLevel(Level.TWO)
   .setNextLevel(Level.THREE)
