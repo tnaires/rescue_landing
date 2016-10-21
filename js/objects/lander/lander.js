@@ -53,7 +53,6 @@ var Lander = function() {
 
     _replenishFuel = function() {
       var replenishment = Math.floor(FUEL_REPLENISHMENT_PERCENTAGE * currentLevel.fuel());
-      console.log(replenishment);
 
       if (fuel + replenishment > currentLevel.fuel()) {
         fuel = currentLevel.fuel();
