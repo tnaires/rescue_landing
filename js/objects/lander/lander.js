@@ -28,8 +28,17 @@ var Lander = function() {
     failedRescue,
     successRescue,
 
+    _resetStatistics = function() {
+      hostagesRescued = 0;
+      hostagesKilled = 0;
+    },
+
     _moveToNextLevel = function() {
       currentLevel = currentLevel.nextLevel();
+
+      if (currentLevel === Level.TITLE) {
+        _resetStatistics();
+      }
     },
 
     _bottomCollision = function() {
@@ -223,9 +232,4 @@ var Lander = function() {
   this.hostagesKilled = function() {
     return hostagesKilled;
   };
-
-  this.resetStatistics = function() {
-    hostagesRescued = 0;
-    hostagesKilled = 0;
-  }
 };
