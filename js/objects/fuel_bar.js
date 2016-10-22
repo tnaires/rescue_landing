@@ -28,6 +28,7 @@ var FuelBar = function(_lander) {
     },
 
     _drawFuelLabel = function(context) {
+      context.textAlign = 'left';
       context.fillStyle = '#FFFFFF';
       context.font = '18px "Lucida Console", Monaco, monospace';
       context.fillText('FUEL: ', 440, 20);

@@ -64,9 +64,10 @@ var Level = function(_levelMatrix, _fuel, _celestialBody) {
     width = context.canvas.width;
     grid.render(context, RENDER_MAP, _celestialBody.landColor(), _celestialBody.backgroundColor());
 
+    context.textAlign = 'left';
     context.font = '15px "Lucida Console", Monaco, monospace';
     context.fillStyle = '#FFFFFF';
-    context.fillText(_celestialBody.info(), 110, 470);
+    context.fillText(_celestialBody.info(), 40, 470);
   };
 
   this.wallsCollideWith = function(position) {

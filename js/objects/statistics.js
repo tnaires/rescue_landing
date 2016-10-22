@@ -16,9 +16,10 @@ var Statistics = function(_lander) {
         ', killed = ' +
         _lander.hostagesKilled();
 
+      context.textAlign = 'right';
       context.fillStyle = '#FFFFFF';
       context.font = '12px "Lucida Console", Monaco, monospace';
-      context.fillText(statistics, 280, 470);
+      context.fillText(statistics, 600, 470);
     } else if (_lander.currentLevel() === Level.END) {
       _lander.resetStatistics();
     }
