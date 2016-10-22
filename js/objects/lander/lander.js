@@ -13,6 +13,8 @@ var Lander = function() {
 
     currentLevel,
     hostageCount,
+    hostagesRescued = 0,
+    hostagesKilled = 0,
     hardMode = false,
 
     position,
@@ -59,6 +61,15 @@ var Lander = function() {
       } else {
         fuel += replenishment;
       }
+    },
+
+    _hostageAtCurrentPosition = function() {
+      var positionToCheck = new Position(
+          position.x() + LANDER_SIZE / 2,
+          position.y() + (LANDER_SIZE - Hostage.SIZE)
+      );
+
+      return currentLevel.hostageAtPosition(positionToCheck);
     };
 
   this.setHardModeOn = function() {
@@ -71,7 +82,7 @@ var Lander = function() {
     }
 
     if (currentLevel.playable()) {
-      hostageCount = currentLevel.hostageCount();
+      hostageCount = 0;
       currentLevel.reset();
 
       boosting = false;
@@ -119,6 +130,10 @@ var Lander = function() {
       if (_bottomCollision()) {
         if (_notLandedProperly() || _topCollision() || speed.vertical() > FALL_SPEED_LIMIT) {
           destroyed = true;
+
+          if (_hostageAtCurrentPosition()) {
+            hostagesKilled++;
+          }
         } else {
           landed = true;
         }
@@ -128,20 +143,23 @@ var Lander = function() {
         destroyed = true;
         speed.reset();
       } else if (currentLevel.exitReached(position)) {
-        failedRescue = (hostageCount != 0);
-        successRescue = (hostageCount == 0);
+        failedRescue = (hostageCount < currentLevel.hostageCount());
+        successRescue = (hostageCount == currentLevel.hostageCount());
+
+        if (successRescue) {
+          hostagesRescued += currentLevel.hostageCount();
+        }
+      }
+
+      if (destroyed) {
+        hostagesKilled += hostageCount;
       }
 
       if (landed) {
-        var
-          positionToCheck = new Position(
-            position.x() + LANDER_SIZE / 2,
-            position.y() + (LANDER_SIZE - Hostage.SIZE)
-          ),
-          hostage = currentLevel.hostageAtPosition(positionToCheck);
+        var hostage = _hostageAtCurrentPosition();
 
         if (hostage && !hostage.alreadyRescued()) {
-          hostageCount--;
+          hostageCount++;
           hostage.rescue();
 
           if (!hardMode) {
@@ -192,5 +210,17 @@ var Lander = function() {
 
   this.noShift = function() {
     shiftDirection = Shift.NONE;
+  };
+
+  this.hostageCount = function() {
+    return hostageCount;
+  };
+
+  this.hostagesRescued = function() {
+    return hostagesRescued;
+  };
+
+  this.hostagesKilled = function() {
+    return hostagesKilled;
   };
 };

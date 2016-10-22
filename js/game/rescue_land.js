@@ -51,6 +51,9 @@ var RescueLand = function() {
 
       var fuelBar = new FuelBar(lander);
       screen.add(fuelBar);
+
+      var statistics = new Statistics(lander);
+      screen.add(statistics);
     },
 
     _setupBackground = function(resolution) {
