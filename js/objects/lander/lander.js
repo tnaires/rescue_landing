@@ -223,4 +223,9 @@ var Lander = function() {
   this.hostagesKilled = function() {
     return hostagesKilled;
   };
+
+  this.resetStatistics = function() {
+    hostagesRescued = 0;
+    hostagesKilled = 0;
+  }
 };

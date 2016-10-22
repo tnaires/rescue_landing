@@ -19,6 +19,8 @@ var Statistics = function(_lander) {
       context.fillStyle = '#FFFFFF';
       context.font = '12px "Lucida Console", Monaco, monospace';
       context.fillText(statistics, 280, 470);
+    } else if (_lander.currentLevel() === Level.END) {
+      _lander.resetStatistics();
     }
   };
 };
