@@ -31,6 +31,7 @@ var Lander = function() {
     _resetStatistics = function() {
       hostagesRescued = 0;
       hostagesKilled = 0;
+      hardMode = false;
     },
 
     _moveToNextLevel = function() {
