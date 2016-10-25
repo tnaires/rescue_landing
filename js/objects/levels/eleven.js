@@ -15,4 +15,4 @@ Level.ELEVEN = new Level([
   'W              W   W',
   'W  H           W   W',
   'WWWWWWWWWWWWWWWWWWWW'
-], 500, CelestialBody.JUPITER);
+], 500, CelestialBody.JUPITER, 11);

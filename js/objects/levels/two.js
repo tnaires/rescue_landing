@@ -15,4 +15,4 @@ Level.TWO = new Level([
   'W   W         W    W',
   'W   W         W  H W',
   'WWWWWWWWWWWWWWWWWWWW'
-], 180, CelestialBody.EARTH);
+], 180, CelestialBody.EARTH, 2);

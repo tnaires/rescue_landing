@@ -1,4 +1,4 @@
-var Level = function(_levelMatrix, _fuel, _celestialBody) {
+var Level = function(_levelMatrix, _fuel, _celestialBody, _levelIndex) {
   var
     hostages = [],
 
@@ -125,5 +125,9 @@ var Level = function(_levelMatrix, _fuel, _celestialBody) {
 
   this.celestialBody = function() {
     return _celestialBody;
+  };
+
+  this.levelIndex = function() {
+    return _levelIndex;
   };
 };

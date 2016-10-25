@@ -15,4 +15,4 @@ Level.TEN = new Level([
   'W                  W',
   'W                  W',
   'WWWWWWWWWWWWWWWWWWWW'
-], 75, CelestialBody.MOON);
+], 75, CelestialBody.MOON, 10);

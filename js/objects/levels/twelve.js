@@ -15,4 +15,4 @@ Level.TWELVE = new Level([
   'W                  W',
   'W      H H H H H H W',
   'WWWWWWWWWWWWWWWWWWWW'
-], 1400, CelestialBody.JUPITER);
+], 1400, CelestialBody.JUPITER, 12);
