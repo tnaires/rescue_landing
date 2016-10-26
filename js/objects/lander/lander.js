@@ -39,6 +39,9 @@ var Lander = function() {
 
       if (currentLevel === Level.TITLE) {
         _resetStatistics();
+        SavedLevelManager.INSTANCE.erase();
+      } else if (currentLevel.playable()) {
+        SavedLevelManager.INSTANCE.save(currentLevel);
       }
     },
 

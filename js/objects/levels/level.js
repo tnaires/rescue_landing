@@ -127,7 +127,7 @@ var Level = function(_levelMatrix, _fuel, _celestialBody, _levelIndex) {
     return _celestialBody;
   };
 
-  this.levelIndex = function() {
+  this.index = function() {
     return _levelIndex;
   };
 };
