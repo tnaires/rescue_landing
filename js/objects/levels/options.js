@@ -1,4 +1,4 @@
-Level.DIFFICULTY = new Info(function(context) {
+Level.OPTIONS = new Info(function(context) {
   var canvas = context.canvas;
   context.textAlign = 'center';
 

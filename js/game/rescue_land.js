@@ -15,14 +15,14 @@ var RescueLand = function() {
     },
 
     _setHardDifficulty = function() {
-      if (lander.currentLevel() === Level.DIFFICULTY) {
+      if (lander.currentLevel() === Level.OPTIONS) {
         lander.setHardMode(true);
         _reset();
       }
     },
 
     _loadLevel = function() {
-      if (lander.currentLevel() === Level.DIFFICULTY && SavedDataManager.INSTANCE.storedData()) {
+      if (lander.currentLevel() === Level.OPTIONS && SavedDataManager.INSTANCE.storedData()) {
         var savedData = SavedDataManager.INSTANCE.load();
 
         lander.setCurrentLevelByIndex(savedData['currentLevelIndex']);
