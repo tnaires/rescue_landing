@@ -22,7 +22,7 @@ var RescueLand = function() {
     },
 
     _loadLevel = function() {
-      if (lander.currentLevel() === Level.DIFFICULTY) {
+      if (lander.currentLevel() === Level.DIFFICULTY && SavedDataManager.INSTANCE.storedData()) {
         var savedData = SavedDataManager.INSTANCE.load();
 
         lander.setCurrentLevelByIndex(savedData['currentLevelIndex']);

@@ -4,6 +4,10 @@ var SavedDataManager = function() {
       return regexp.exec(document.cookie)[0].split('=')[1];
     };
 
+  this.storedData = function() {
+    return document.cookie;
+  };
+
   this.save = function(data) {
     var expirationDate = new Date();
     expirationDate.setFullYear(expirationDate.getFullYear() + 20);
