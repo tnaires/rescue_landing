@@ -2,13 +2,16 @@ var RescueLand = function() {
   var
     fps, screen, background, inputHandler, lander,
 
-    _reset = function() {
-      lander.reset(true);
-
+    _resetBackground = function() {
       background.clear();
       background.eraseObjects();
       background.add(lander.currentLevel());
       background.draw();
+    },
+
+    _reset = function() {
+      lander.reset(true);
+      _resetBackground();
     },
 
     _setHardDifficulty = function() {
@@ -18,10 +21,21 @@ var RescueLand = function() {
       }
     },
 
+    _loadLevel = function() {
+      if (lander.currentLevel() === Level.DIFFICULTY) {
+        var currentLevelIndex = SavedDataManager.INSTANCE.load();
+        lander.setCurrentLevelByIndex(currentLevelIndex);
+        _resetBackground();
+      }
+    },
+
     _registerInputCallbacks = function() {
       inputHandler.registerCallback(InputHandler.ON_KEY_DOWN, InputHandler.SPACE, _reset);
 
       inputHandler.registerCallback(InputHandler.ON_KEY_UP, InputHandler.ENTER, _setHardDifficulty);
+
+      inputHandler.registerCallback(InputHandler.ON_KEY_UP, InputHandler.UPCASE_L, _loadLevel);
+      inputHandler.registerCallback(InputHandler.ON_KEY_UP, InputHandler.DOWNCASE_L, _loadLevel);
 
       inputHandler.registerCallback(InputHandler.ON_KEY_DOWN, InputHandler.ARROW_UP, lander.boost);
       inputHandler.registerCallback(InputHandler.ON_KEY_UP, InputHandler.ARROW_UP, lander.release);

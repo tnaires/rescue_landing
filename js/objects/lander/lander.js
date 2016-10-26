@@ -39,9 +39,9 @@ var Lander = function() {
 
       if (currentLevel === Level.TITLE) {
         _resetStatistics();
-        SavedLevelManager.INSTANCE.erase();
+        SavedDataManager.INSTANCE.erase();
       } else if (currentLevel.playable()) {
-        SavedLevelManager.INSTANCE.save(currentLevel);
+        SavedDataManager.INSTANCE.save(currentLevel);
       }
     },
 
@@ -113,6 +113,21 @@ var Lander = function() {
 
   this.setCurrentLevel = function(_currentLevel) {
     currentLevel = _currentLevel;
+    this.reset(false);
+  };
+
+  this.setCurrentLevelByIndex = function(_currentLevelIndex) {
+    var levelToCheck = currentLevel;
+
+    while(levelToCheck) {
+      if (levelToCheck.index && levelToCheck.index() === _currentLevelIndex) {
+        currentLevel = levelToCheck;
+        break;
+      }
+
+      levelToCheck = levelToCheck.nextLevel();
+    }
+
     this.reset(false);
   };
 

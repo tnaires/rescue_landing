@@ -39,3 +39,5 @@ InputHandler.ARROW_UP = 38;
 InputHandler.ARROW_RIGHT = 39;
 InputHandler.ARROW_DOWN = 40;
 InputHandler.ENTER = 13;
+InputHandler.UPCASE_L = 76;
+InputHandler.DOWNCASE_L = 108;
