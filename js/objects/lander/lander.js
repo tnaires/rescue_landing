@@ -41,7 +41,12 @@ var Lander = function() {
         _resetStatistics();
         SavedDataManager.INSTANCE.erase();
       } else if (currentLevel.playable()) {
-        SavedDataManager.INSTANCE.save(currentLevel);
+        SavedDataManager.INSTANCE.save({
+          currentLevelIndex: currentLevel.index(),
+          hardMode: hardMode,
+          hostagesRescued: hostagesRescued,
+          hostagesKilled: hostagesKilled
+        });
       }
     },
 
@@ -85,8 +90,8 @@ var Lander = function() {
       return currentLevel.hostageAtPosition(positionToCheck);
     };
 
-  this.setHardModeOn = function() {
-    hardMode = true;
+  this.setHardMode = function(_hardMode) {
+    hardMode = _hardMode;
   };
 
   this.reset = function(loadNextLevel) {
@@ -246,6 +251,14 @@ var Lander = function() {
 
   this.hostagesRescued = function() {
     return hostagesRescued;
+  };
+
+  this.setHostagesRescued = function(_hostagesRescued) {
+    hostagesRescued = _hostagesRescued;
+  };
+
+  this.setHostagesKilled = function(_hostagesKilled) {
+    hostagesKilled = _hostagesKilled;
   };
 
   this.hostagesKilled = function() {

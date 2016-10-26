@@ -1,10 +1,18 @@
 var SavedDataManager = function() {
-  this.save = function(level) {
+  var
+    _readCookie = function(regexp) {
+      return regexp.exec(document.cookie)[0].split('=')[1];
+    };
+
+  this.save = function(data) {
     var expirationDate = new Date();
     expirationDate.setFullYear(expirationDate.getFullYear() + 20);
 
-    document.cookie = 'currentLevelIndex=' + level.index() +
-      '; expires=' + expirationDate.toUTCString();
+    document.cookie = 'currentLevelIndex=' + data['currentLevelIndex'];
+    document.cookie = 'hardMode=' + data['hardMode'].toString();
+    document.cookie = 'hostagesRescued=' + data['hostagesRescued'];
+    document.cookie = 'hostagesKilled=' + data['hostagesKilled'];
+    document.cookie = 'expires=' + expirationDate.toUTCString();
   };
 
   this.erase = function() {
@@ -12,8 +20,12 @@ var SavedDataManager = function() {
   };
 
   this.load = function() {
-    var currentLevelIndex = /\d+/.exec(document.cookie);
-    return currentLevelIndex && parseInt(currentLevelIndex[0]);
+    return {
+      currentLevelIndex: parseInt(_readCookie(/currentLevelIndex=\d+/)),
+      hardMode: _readCookie(/hardMode=\w+/) === 'true',
+      hostagesKilled: parseInt(_readCookie(/hostagesKilled=\d+/)),
+      hostagesRescued: parseInt(_readCookie(/hostagesRescued=\d+/)),
+    };
   };
 };
 

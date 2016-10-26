@@ -16,15 +16,20 @@ var RescueLand = function() {
 
     _setHardDifficulty = function() {
       if (lander.currentLevel() === Level.DIFFICULTY) {
-        lander.setHardModeOn();
+        lander.setHardMode(true);
         _reset();
       }
     },
 
     _loadLevel = function() {
       if (lander.currentLevel() === Level.DIFFICULTY) {
-        var currentLevelIndex = SavedDataManager.INSTANCE.load();
-        lander.setCurrentLevelByIndex(currentLevelIndex);
+        var savedData = SavedDataManager.INSTANCE.load();
+
+        lander.setCurrentLevelByIndex(savedData['currentLevelIndex']);
+        lander.setHardMode(savedData['hardMode']);
+        lander.setHostagesRescued(savedData['hostagesRescued']);
+        lander.setHostagesKilled(savedData['hostagesKilled']);
+
         _resetBackground();
       }
     },
