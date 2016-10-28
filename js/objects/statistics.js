@@ -21,13 +21,15 @@ var Statistics = function(_lander) {
       context.font = '12px "Lucida Console", Monaco, monospace';
       context.fillText(statistics, 600, 470);
     } else if (_lander.currentLevel() === Level.END) {
-      var canvas = context.canvas;
+      var
+        canvas = context.canvas,
+        level = _lander.hardMode() ? 'HARD' : 'NORMAL';
 
       context.textAlign = 'center';
       context.fillStyle = '#000000';
 
       context.font = 'bold 25px "Lucida Console", Monaco, monospace';
-      context.fillText('YOUR SCORE', canvas.width / 2, 180);
+      context.fillText('YOUR SCORE - ' + level + ' LEVEL', canvas.width / 2, 180);
 
       context.font = '20px "Lucida Console", Monaco, monospace';
       context.fillText('Hostages rescued: ' + _lander.hostagesRescued(), canvas.width / 2, 220);

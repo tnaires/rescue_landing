@@ -264,4 +264,8 @@ var Lander = function() {
   this.hostagesKilled = function() {
     return hostagesKilled;
   };
+
+  this.hardMode = function() {
+    return hardMode;
+  };
 };
